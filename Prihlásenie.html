@@ -52,7 +52,8 @@
   </div>
 
   <script>
-    let isLogin = true;
+    let isLogin = true; // Stav formulára (prihlásenie/registrácia)
+    let currentEmail = ""; // Ulož aktuálny email po prihlásení
 
     function toggleForm() {
       isLogin = !isLogin;
@@ -69,26 +70,29 @@
       const password = document.getElementById('password').value;
 
       if (isLogin) {
+        // Prihlásenie
         const storedUser = JSON.parse(localStorage.getItem(email));
         if (storedUser && storedUser.password === password) {
-          localStorage.setItem('currentEmail', email); // Uloženie e-mailu
-          window.location.href = "quiz.html"; // Presmerovanie na kvíz
+          currentEmail = email; // Ulož aktuálny email po prihlásení
+          window.location.href = "index.html"; // Presmerovanie po úspešnom prihlásení
         } else {
           document.getElementById('error-message').style.display = 'block';
         }
       } else {
+        // Registrácia
         if (localStorage.getItem(email)) {
           document.getElementById('error-message').innerText = 'Používateľ už existuje!';
           document.getElementById('error-message').style.display = 'block';
         } else {
           localStorage.setItem(email, JSON.stringify({ email: email, password: password }));
           alert('Registrácia úspešná! Teraz sa môžete prihlásiť.');
-          toggleForm();
+          toggleForm(); // Prepnutie späť na prihlásenie
         }
       }
     });
   </script>
 </body>
 </html>
+
 
 
