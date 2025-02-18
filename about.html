@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="sk">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>PRM - Programovacie Ukážky</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #e3f2fd;
+      padding: 20px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    nav {
+      background: linear-gradient(90deg, #0d0b5e, #020041);
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #00bfff;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-icons i {
+      color: #ffffff;
+      font-size: 18px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-icons i:hover {
+      color: #00bfff;
+    }
+
+    .code-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+    }
+
+    pre {
+      background: #f1f1f1;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+
+    h2 {
+      color: #007bff;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="index.html" class="logo">PRM</a>
+    <div>
+      <a href="index.html" class="active">Domov</a>
+      <a href="about.html">O Stránke</a>
+      <a href="service.html">Interaktivita</a>
+      <a href="why.html">Jazyky</a>
+      <a href="team.html">Quiz</a>
+      <a href="Prihlsenie.html"></a>
+    </div>
+    <div class="nav-icons">
+      <a href="#"><i class="fas fa-user"></i> Prihlásiť sa</a>
+      <a href="#"><i class="fas fa-search"></i></a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>Ukážky kódov - HTML, CSS, JavaScript</h1>
+    <p>Preskúmajte základné kódy pre jednoduchý štart s programovaním.</p>
+  </header>
+
+  <section class="code-section">
+    <h2>HTML Kód</h2>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Moja Prvá Stránka&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Ahoj, svet!&lt;/h1&gt;
+    &lt;p&gt;Toto je môj prvý HTML dokument.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+  </section>
+
+  <section class="code-section">
+    <h2>CSS Kód</h2>
+    <pre><code>body {
+  background-color: lightblue;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  color: darkblue;
+  text-align: center;
+}</code></pre>
+  </section>
+
+  <section class="code-section">
+    <h2>JavaScript Kód</h2>
+    <pre><code>function pozdrav() {
+  alert("Ahoj, programátor!");
+}
+
+pozdrav();</code></pre>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PRM - Učíme sa programovať spolu!</p>
+  </footer>
+</body>
+
+</html>
