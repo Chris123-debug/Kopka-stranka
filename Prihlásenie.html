@@ -53,7 +53,7 @@
 
   <script>
     let isLogin = true; // Stav formulára (prihlásenie/registrácia)
-    let currentEmail = ""; // Ulož aktuálny email po prihlásení
+    let currentEmail = localStorage.getItem('currentEmail') || ""; // Ulož aktuálny email po prihlásení
 
     function toggleForm() {
       isLogin = !isLogin;
@@ -73,7 +73,8 @@
         // Prihlásenie
         const storedUser = JSON.parse(localStorage.getItem(email));
         if (storedUser && storedUser.password === password) {
-          currentEmail = email; // Ulož aktuálny email po prihlásení
+          localStorage.setItem('currentEmail', email); // Uloženie aktuálneho emailu
+          currentEmail = email;
           window.location.href = "index.html"; // Presmerovanie po úspešnom prihlásení
         } else {
           document.getElementById('error-message').style.display = 'block';
@@ -90,9 +91,35 @@
         }
       }
     });
+
+    function checkAnswers() {
+      var score = 0;
+      var totalQuestions = 5;
+      var correctAnswers = ['a', 'b', 'b', 'b', 'c'];
+      for (var i = 1; i <= totalQuestions; i++) {
+        var answer = document.querySelector('input[name="q' + i + '"]:checked');
+        if (answer && answer.value === correctAnswers[i - 1]) {
+          score++;
+        }
+      }
+      document.getElementById('quizResult').innerHTML = "Dosiahol(a) si " + score + " z " + totalQuestions + " správnych odpovedí.";
+
+      // Odoslanie emailu s výsledkom
+      emailjs.send('service_qqlky1g', 'template_3ts4kwq', {
+        to_email: localStorage.getItem('currentEmail'),
+        from_name: 'PRM Quiz',
+        subject: 'Výsledky kvízu',
+        message: 'Dosiahol(a) si ' + score + ' z ' + totalQuestions + ' správnych odpovedí.'
+      }).then(function(response) { 
+        console.log('Email úspešne odoslaný!', response.status, response.text);
+      }, function(error) {
+        console.log('Chyba pri odosielaní emailu:', error);
+      });
+    }
   </script>
 </body>
 </html>
+
 
 
 
