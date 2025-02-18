@@ -74,7 +74,8 @@
         const storedUser = JSON.parse(localStorage.getItem(email));
         if (storedUser && storedUser.password === password) {
           currentEmail = email; // Ulož aktuálny email po prihlásení
-          window.location.href = "index.html"; // Presmerovanie po úspešnom prihlásení
+          localStorage.setItem('currentEmail', currentEmail);
+          window.location.href = "quiz.html"; // Presmerovanie po úspešnom prihlásení (na stránku s kvízom)
         } else {
           document.getElementById('error-message').style.display = 'block';
         }
