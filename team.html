@@ -1,194 +1,79 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="sk">
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/favicon.png" type="">
-
-  <title> PRM </title>
-
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Quiz - PRM</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function () {
-      emailjs.init("hafXJBp4EOGRVgsYg"); // Použi tvoj Public Key
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init("hafXJBp4EOGRVgsYg"); // Použi svoj EmailJS Public Key
     })();
   </script>
-
 </head>
 
-<body class="sub_page">
+<body>
 
-  <div class="hero_area">
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
-      </div>
-    </div>
+  <div class="container">
+    <h2>Quiz</h2>
+    <form id="quizForm">
+      <p><strong>1. Čo znamená skratka HTML?</strong></p>
+      <input type="radio" name="q1" value="a"> Hyper Text Markup Language<br>
+      <input type="radio" name="q1" value="b"> Hyperlinks and Text Markup Language<br>
+      <input type="radio" name="q1" value="c"> Home Tool Markup Language<br>
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              PRM
-            </span>
-          </a>
+      <p><strong>2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?</strong></p>
+      <input type="radio" name="q2" value="a"> color<br>
+      <input type="radio" name="q2" value="b"> background-color<br>
+      <input type="radio" name="q2" value="c"> bgcolor<br>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
+      <p><strong>3. Aká je správna syntax pre komentár v JavaScripte?</strong></p>
+      <input type="radio" name="q3" value="a"> # Toto je komentár<br>
+      <input type="radio" name="q3" value="b"> // Toto je komentár<br>
+      <input type="radio" name="q3" value="c"> /* Toto je komentár */<br>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Domov </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> O Stránke</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="service.html">Interaktivita</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="why.html">Jazyky</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="team.html">Quiz <span class="sr-only">(current)</span> </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Prihlásenie.html"> <i class="fa fa-user" aria-hidden="true"></i> Prihlásiť sa</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- end header section -->
+      <button type="button" onclick="checkAnswers()">Odoslať</button>
+    </form>
+    <div id="quizResult"></div>
   </div>
 
-  <!-- team section -->
-  <section class="team_section layout_padding">
-    <div class="container-fluid">
-      <div class="heading_container heading_center">
-        <h2 class="">
-           Quiz<span>Quiz </span>
-        </h2>
-      </div>
-
-      <div class="team_container">
-        <div class="row">
-          <!-- Quiz Section -->
-          <div class="col-lg-12">
-            <div class="quiz_section">
-              <h3>Otestuj si svoje znalosti!</h3>
-              <form id="quizForm">
-                <div class="question">
-                  <p><strong>1. Čo znamená skratka HTML?</strong></p>
-                  <input type="radio" name="q1" value="a"> Hyper Text Markup Language<br>
-                  <input type="radio" name="q1" value="b"> Hyperlinks and Text Markup Language<br>
-                  <input type="radio" name="q1" value="c"> Home Tool Markup Language<br>
-                </div>
-                <div class="question">
-                  <p><strong>2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?</strong></p>
-                  <input type="radio" name="q2" value="a"> color<br>
-                  <input type="radio" name="q2" value="b"> background-color<br>
-                  <input type="radio" name="q2" value="c"> bgcolor<br>
-                </div>
-                <div class="question">
-                  <p><strong>3. Aká je správna syntax pre komentár v JavaScripte?</strong></p>
-                  <input type="radio" name="q3" value="b"> // Toto je komentár <br>
-                  <input type="radio" name="q3" value="c"> /* Toto je komentár */ <br>
-                </div>
-                <div class="question">
-                  <p><strong>4. Ako označíte ID v CSS?</strong></p>
-                  <input type="radio" name="q4" value="a"> .id<br>
-                  <input type="radio" name="q4" value="b"> #id<br>
-                  <input type="radio" name="q4" value="c"> id<br>
-                </div>
-                <div class="question">
-                  <p><strong>5. Ktorý HTML tag sa používa na definovanie odseku?</strong></p>
-                  <input type="radio" name="q5" value="a"> &lt;paragraph&gt;<br>
-                  <input type="radio" name="q5" value="b"> &lt;section&gt;<br>
-                  <input type="radio" name="q5" value="c"> &lt;p&gt;<br>
-                </div>
-                <button type="button" onclick="checkAnswers()">Odoslať</button>
-              </form>
-              <div id="quizResult"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <script>
-    // Ulož aktuálny email po prihlásení
-    let currentEmail = localStorage.getItem('currentEmail');
-
-    // Funkcia na kontrolu odpovedí v kvíze a odoslanie emailu s výsledkom
     function checkAnswers() {
-      var score = 0;
-      var totalQuestions = 5;
-      var correctAnswers = ['a', 'b', 'b', 'b', 'c'];
-      for (var i = 1; i <= totalQuestions; i++) {
-        var answer = document.querySelector('input[name="q' + i + '"]:checked');
-        if (answer && answer.value === correctAnswers[i - 1]) {
+      let score = 0;
+      const correctAnswers = { q1: "a", q2: "b", q3: "b" };
+      for (let key in correctAnswers) {
+        const answer = document.querySelector(`input[name="${key}"]:checked`);
+        if (answer && answer.value === correctAnswers[key]) {
           score++;
         }
       }
-      document.getElementById('quizResult').innerHTML = "Dosiahol(a) si " + score + " z " + totalQuestions správnych odpovedí.";
+      
+      let resultText = `Dosiahol(a) si ${score} z ${Object.keys(correctAnswers).length} správnych odpovedí.`;
+      document.getElementById("quizResult").innerText = resultText;
 
-      // Odoslanie emailu s výsledkom
-      emailjs.send('service_qqlky1g', 'template_3ts4kwq', {
-        to_email: currentEmail,
-        from_name: 'Christopher Kurthy', // Pridanie mena
-        subject: 'Výsledky kvízu',
-        message: 'Dosiahol(a) si ' + score + ' z ' + totalQuestions správnych odpovedí.'
-      }).then(function(response) { 
-        console.log('Email úspešne odoslaný!', response.status, response.text);
-      }, function(error) {
-        console.log('Chyba pri odosielaní emailu:', error);
+      let userEmail = localStorage.getItem("currentEmail");
+      if (!userEmail) {
+        alert("Chyba: Nie ste prihlásený!");
+        return;
+      }
+
+      emailjs.send("service_qqlky1g", "template_3ts4kwq", {
+        to_email: userEmail,
+        from_name: "PRM Quiz",
+        subject: "Výsledky kvízu",
+        message: resultText
+      }).then(() => {
+        alert("Výsledky boli odoslané na váš email!");
+      }).catch(error => {
+        console.error("Chyba pri odoslaní e-mailu:", error);
       });
     }
-
-    // Načítanie aktuálneho emailu po prihlásení
-    window.onload = function() {
-      var email = localStorage.getItem('currentEmail');
-      if (email) {
-        currentEmail = email;
-      }
-    };
   </script>
 
 </body>
 </html>
-          <!-- Quiz Section -->
-          <div class="col-lg-12">
-            <div class="
+
