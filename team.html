@@ -28,10 +28,13 @@
 <body class="sub_page" onload="loadQuiz()">
 
   <div class="hero_area">
+    <!-- Začiatok header sekcie -->
     <header class="header_section">
       <div class="container-fluid">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html"> <span> PRM </span> </a>
+        <nav class="navbar navbar-expand-lg custom_nav-container">
+          <a class="navbar-brand" href="index.html">
+            <span> PRM </span>
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
@@ -53,13 +56,17 @@
                 <a class="nav-link" href="team.html">Quiz <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="Prihlásenie.html"> <i class="fa fa-user" aria-hidden="true"></i> Prihlásiť sa</a>
+                <a class="nav-link" href="Prihlásenie.html">
+                  <i class="fa fa-user" aria-hidden="true"></i> Prihlásiť sa
+                </a>
               </li>
             </ul>
           </div>
         </nav>
       </div>
     </header>
+    <!-- Koniec header sekcie -->
+
     <div class="score-container">Body: <span id="userScore">0</span></div>
   </div>
 
@@ -86,11 +93,32 @@
 
   <script>
     let questions = [
-      { question: "Čo znamená skratka HTML?", options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"], correctAnswer: "a" },
-      { question: "Ktorá vlastnosť sa používa na zmenu pozadia v CSS?", options: ["color", "background-color", "bgcolor"], correctAnswer: "b" },
-      { question: "Aká je správna syntax pre komentár v JavaScripte?", options: ["// Toto je komentár", "/* Toto je komentár */", "<!-- Toto je komentár -->"], correctAnswer: "a" },
-      { question: "Čo robí tag <head> v HTML?", options: ["Obsahuje meta informácie", "Zobrazuje hlavný obsah", "Obsahuje pätičku stránky"], correctAnswer: "a" },
-      { question: "Ako definovať premennú v JavaScripte?", options: ["var name = 'hodnota';", "variable name = 'hodnota';", "v name = 'hodnota';"], correctAnswer: "a" }
+      {
+        question: "Čo znamená skratka HTML?",
+        options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+        correctAnswer: "a"
+      },
+      {
+        question: "Ktorá vlastnosť sa používa na zmenu pozadia v CSS?",
+        options: ["color", "background-color", "bgcolor"],
+        correctAnswer: "b"
+      },
+      {
+        question: "Aká je správna syntax pre komentár v JavaScripte?",
+        options: ["// Toto je komentár", "/* Toto je komentár */", "<!-- Toto je komentár -->"],
+        correctAnswer: "a"
+      },
+      {
+        question: "Čo robí tag &lt;head&gt; v HTML?",
+        options: ["Obsahuje meta informácie", "Zobrazuje hlavný obsah", "Obsahuje pätičku stránky"],
+        correctAnswer: "a"
+      },
+      {
+        question: "Ako definovať premennú v JavaScripte?",
+        options: ["var name = 'hodnota';", "variable name = 'hodnota';", "v name = 'hodnota';"],
+        correctAnswer: "a"
+      }
+      // Pridajte ďalších 25 otázok...
     ];
 
     function loadQuiz() {
@@ -98,12 +126,16 @@
       quizContainer.innerHTML = "";
       let userScore = localStorage.getItem('userScore') || 0;
       document.getElementById('userScore').innerText = userScore;
-      
-      questions.forEach((q, index) => {
+
+      // Náhodné zamiešanie otázok a výber 5
+      shuffle(questions);
+      let selectedQuestions = questions.slice(0, 5);
+
+      selectedQuestions.forEach((q, index) => {
         let questionDiv = document.createElement('div');
         questionDiv.className = 'question';
         questionDiv.innerHTML = `<p><strong>${index + 1}. ${q.question}</strong></p>`;
-        
+
         q.options.forEach((option, optionIndex) => {
           let optionLetter = String.fromCharCode(97 + optionIndex);
           questionDiv.innerHTML += `<input type="radio" name="q${index + 1}" value="${optionLetter}"> ${option}<br>`;
@@ -111,20 +143,31 @@
 
         quizContainer.appendChild(questionDiv);
       });
+
+      // Uloženie vybraných otázok pre overenie odpovedí
+      localStorage.setItem('currentQuestions', JSON.stringify(selectedQuestions));
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
     }
 
     function checkAnswers() {
       let score = 0;
-      let totalQuestions = questions.length;
-      let correctAnswers = questions.map(q => q.correctAnswer);
+      let selectedQuestions = JSON.parse(localStorage.getItem('currentQuestions'));
+      let totalQuestions = selectedQuestions.length;
+
       for (let i = 1; i <= totalQuestions; i++) {
         let answer = document.querySelector('input[name="q' + i + '"]:checked');
-        if (answer && answer.value === correctAnswers[i - 1]) {
+        if (answer && answer.value === selectedQuestions[i - 1].correctAnswer) {
           score++;
         }
       }
       document.getElementById('quizResult').innerHTML = `Správne odpovede: ${score} z ${totalQuestions}.`;
-      
+
       let userScore = parseInt(localStorage.getItem('userScore')) || 0;
       userScore += score;
       localStorage.setItem('userScore', userScore);
@@ -134,6 +177,7 @@
 
 </body>
 </html>
+
 
 
 
