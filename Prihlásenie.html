@@ -46,6 +46,15 @@
       color: red;
       display: none;
     }
+    /* Pridanie štýlu pre odkaz na hlavnú stránku */
+    .back-link {
+      color: #00aaff;
+      margin-top: 15px;
+      display: block;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -57,6 +66,8 @@
     <div id="welcome-section">
       <p id="welcome-message"></p>
       <button class="btn btn-primary btn-block" id="logoutButton" onclick="logout()">Odhlásiť sa</button>
+      <!-- Odkaz na hlavnú stránku -->
+      <a href="index.html" class="back-link">Vrátiť sa na hlavnú stránku</a>
     </div>
 
     <!-- Formulár pre prihlásenie/registráciu -->
@@ -66,6 +77,10 @@
       <input type="password" class="form-control" placeholder="Potvrdiť heslo" id="confirmPassword" style="display: none;"><br>
       <button type="submit" class="btn btn-primary btn-block" id="authButton">Prihlásiť sa</button>
     </form>
+
+    <!-- Odkaz na hlavnú stránku -->
+    <a href="index.html" class="back-link">Vrátiť sa na hlavnú stránku</a>
+
     <p id="error-message">Chyba!</p>
     <p id="toggle-message">Nemáte účet? <span class="toggle-link" onclick="toggleForm()">Zaregistrujte sa</span></p>
   </div>
