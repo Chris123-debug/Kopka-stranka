@@ -2,107 +2,44 @@
 <html>
 
 <head>
-  <!-- Basic -->
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
-  <meta name="author" content="" />
-  <link rel="shortcut icon" href="images/favicon.png" type="">
-
   <title> PRM </title>
-
-  <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-  <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
-
-  <!--owl slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- font awesome style -->
   <link href="css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
-
 </head>
 
 <body class="sub_page">
 
   <div class="hero_area">
-    <div class="hero_bg_box">
-      <div class="bg_img_box">
-        <img src="images/hero-bg.png" alt="">
-      </div>
-    </div>
-
-    <!-- header section strats -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              PRM
-            </span>
-          </a>
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
-              <li class="nav-item ">
-                <a class="nav-link" href="index.html">Domov </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> O Stránke</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="service.html">Interaktivita</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="why.html">Jazyky</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="team.html">Quiz <span class="sr-only">(current)</span> </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="Prihlásenie.html"> <i class="fa fa-user" aria-hidden="true"></i> Prihlásiť sa</a>
-              </li>
-            </ul>
-          </div>
+          <a class="navbar-brand" href="index.html"> <span> PRM </span> </a>
         </nav>
       </div>
     </header>
-    <!-- end header section -->
   </div>
 
-  <!-- team section -->
   <section class="team_section layout_padding">
     <div class="container-fluid">
       <div class="heading_container heading_center">
-        <h2 class="">
-           Quiz<span>Quiz </span>
-        </h2>
+        <h2> Quiz <span>Quiz </span> </h2>
       </div>
 
       <div class="team_container">
         <div class="row">
-          <!-- Quiz Section -->
           <div class="col-lg-12">
             <div class="quiz_section">
               <h3>Otestuj si svoje znalosti!</h3>
               <form id="quizForm">
                 <div id="quizQuestions"></div>
-                <button type="button" onclick="checkAnswers()">Odoslať</button>
+                <button type="button" onclick="checkAnswers()">Vyhodnotiť</button>
               </form>
               <div id="quizResult"></div>
             </div>
@@ -114,22 +51,9 @@
 
   <script>
     let questions = [
-      {
-        question: "1. Čo znamená skratka HTML?",
-        options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
-        correctAnswer: "a"
-      },
-      {
-        question: "2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?",
-        options: ["color", "background-color", "bgcolor"],
-        correctAnswer: "b"
-      },
-      {
-        question: "3. Aká je správna syntax pre komentár v JavaScripte?",
-        options: ["// Toto je komentár", "/* Toto je komentár */", "<!-- Toto je komentár -->"],
-        correctAnswer: "a"
-      },
-      // Pridajte ďalších 27 otázok...
+      { question: "1. Čo znamená skratka HTML?", options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"], correctAnswer: "a" },
+      { question: "2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?", options: ["color", "background-color", "bgcolor"], correctAnswer: "b" },
+      { question: "3. Aká je správna syntax pre komentár v JavaScripte?", options: ["// Toto je komentár", "/* Toto je komentár */", "<!-- Toto je komentár -->"], correctAnswer: "a" }
     ];
 
     function shuffle(array) {
@@ -169,13 +93,7 @@
           score++;
         }
       }
-      document.getElementById('quizResult').innerHTML = "Dosiahol(a) si " + score + " z " + totalQuestions správnych odpovedí.";
-
-      // Zbieranie bodíkov
-      let totalPoints = localStorage.getItem('totalPoints') ? parseInt(localStorage.getItem('totalPoints')) : 0;
-      totalPoints += score;
-      localStorage.setItem('totalPoints', totalPoints);
-      document.getElementById('quizResult').innerHTML += "<br>Celkový počet bodov: " + totalPoints;
+      document.getElementById('quizResult').innerHTML = `Správne odpovede: ${score} z ${totalQuestions}.`;
     }
 
     window.onload = loadQuiz;
@@ -183,6 +101,7 @@
 
 </body>
 </html>
+
 
 
 
