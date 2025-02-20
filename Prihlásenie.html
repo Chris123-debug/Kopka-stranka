@@ -1,67 +1,171 @@
-<script>
-    let isLogin = true;
-    let currentEmail = "";
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prihlásenie - PRM</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      text-align: center;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+    }
+    .toggle-link {
+      color: #00aaff;
+      cursor: pointer;
+    }
+    #welcome-section {
+      display: none;
+    }
+    #logoutButton {
+      margin-top: 10px;
+    }
+    #error-message {
+      color: red;
+      display: none;
+    }
+    /* Pridanie štýlu pre odkaz na hlavnú stránku */
+    .back-link {
+      color: #00aaff;
+      margin-top: 15px;
+      display: block;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
 
+  <div class="container">
+    <h2 id="form-title">Prihlásenie</h2>
+
+    <!-- Sekcia pre uvítaciu správu a odhlásenie -->
+    <div id="welcome-section">
+      <p id="welcome-message"></p>
+      <button class="btn btn-primary btn-block" id="logoutButton" onclick="logout()">Odhlásiť sa</button>
+      <!-- Odkaz na hlavnú stránku -->
+      <a href="index.html" class="back-link"></a>
+    </div>
+
+    <!-- Formulár pre prihlásenie/registráciu -->
+    <form id="authForm">
+      <input type="email" class="form-control" placeholder="Email" id="email" required><br>
+      <input type="password" class="form-control" placeholder="Heslo" id="password" required><br>
+      <input type="password" class="form-control" placeholder="Potvrdiť heslo" id="confirmPassword" style="display: none;"><br>
+      <button type="submit" class="btn btn-primary btn-block" id="authButton">Prihlásiť sa</button>
+    </form>
+
+    <!-- Odkaz na hlavnú stránku -->
+    <a href="index.html" class="back-link">Vrátiť sa na hlavnú stránku</a>
+
+    <p id="error-message">Chyba!</p>
+    <p id="toggle-message">Nemáte účet? <span class="toggle-link" onclick="toggleForm()">Zaregistrujte sa</span></p>
+  </div>
+
+  <script>
+    let isLogin = true; // Stav formulára (prihlásenie/registrácia)
+    let currentEmail = ""; // Ulož aktuálny email po prihlásení
+
+    // Skontroluj, či je používateľ prihlásený
     window.onload = function() {
-        currentEmail = localStorage.getItem('currentEmail') || "";
-        if (currentEmail !== "") {
-            showWelcome();
-        }
+      currentEmail = localStorage.getItem('currentEmail') || "";
+      if (currentEmail !== "") {
+        showWelcome();
+      }
     };
 
+    function toggleForm() {
+      isLogin = !isLogin;
+      document.getElementById('form-title').innerText = isLogin ? 'Prihlásenie' : 'Registrácia';
+      document.getElementById('authButton').innerText = isLogin ? 'Prihlásiť sa' : 'Zaregistrovať sa';
+      document.getElementById('toggle-message').innerHTML = isLogin ?
+        'Nemáte účet? <span class="toggle-link" onclick="toggleForm()">Zaregistrujte sa</span>' :
+        'Máte účet? <span class="toggle-link" onclick="toggleForm()">Prihláste sa</span>';
+      document.getElementById('confirmPassword').style.display = isLogin ? 'none' : 'block';
+      document.getElementById('error-message').style.display = 'none';
+      document.getElementById('authForm').reset();
+    }
+
     function showWelcome() {
-        document.getElementById('welcome-message').innerText = 'Vitajte, ' + currentEmail;
-        document.getElementById('authForm').style.display = 'none';
-        document.getElementById('toggle-message').style.display = 'none';
-        document.getElementById('welcome-section').style.display = 'block';
-        document.getElementById('form-title').innerText = 'Úvodná obrazovka';
-        
-        // Načítanie a zobrazenie bodov prihláseného používateľa
-        let userData = JSON.parse(localStorage.getItem(currentEmail)) || {};
-        let userScore = userData.score || 0;
-        document.getElementById('userScore').innerText = `Tvoje body: ${userScore}`;
+      document.getElementById('welcome-message').innerText = 'Vitajte, ' + currentEmail;
+      document.getElementById('authForm').style.display = 'none';
+      document.getElementById('toggle-message').style.display = 'none';
+      document.getElementById('welcome-section').style.display = 'block';
+      document.getElementById('form-title').innerText = 'Úvodná obrazovka';
     }
 
     function logout() {
-        currentEmail = "";
-        localStorage.removeItem('currentEmail');
-        document.getElementById('authForm').style.display = 'block';
-        document.getElementById('toggle-message').style.display = 'block';
-        document.getElementById('welcome-section').style.display = 'none';
-        document.getElementById('form-title').innerText = 'Prihlásenie';
+      currentEmail = "";
+      localStorage.removeItem('currentEmail');
+      document.getElementById('form-title').innerText = 'Prihlásenie';
+      document.getElementById('authButton').innerText = 'Prihlásiť sa';
+      document.getElementById('authForm').style.display = 'block';
+      document.getElementById('toggle-message').style.display = 'block';
+      document.getElementById('welcome-section').style.display = 'none';
+      document.getElementById('authForm').reset();
     }
 
     document.getElementById('authForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-        if (isLogin) {
-            const storedUser = JSON.parse(localStorage.getItem(email));
-            if (storedUser && storedUser.password === password) {
-                currentEmail = email;
-                localStorage.setItem('currentEmail', currentEmail);
-                showWelcome();
-            } else {
-                document.getElementById('error-message').innerText = 'Nesprávne prihlasovacie údaje!';
-                document.getElementById('error-message').style.display = 'block';
-            }
+      if (isLogin) {
+        // Prihlásenie
+        const storedUser = JSON.parse(localStorage.getItem(email));
+        if (storedUser && storedUser.password === password) {
+          currentEmail = email; // Ulož aktuálny email po prihlásení
+          localStorage.setItem('currentEmail', currentEmail);
+          showWelcome();
         } else {
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            if (password !== confirmPassword) {
-                document.getElementById('error-message').innerText = 'Heslá sa nezhodujú!';
-                document.getElementById('error-message').style.display = 'block';
-            } else if (localStorage.getItem(email)) {
-                document.getElementById('error-message').innerText = 'Používateľ už existuje!';
-                document.getElementById('error-message').style.display = 'block';
-            } else {
-                localStorage.setItem(email, JSON.stringify({ email: email, password: password, score: 0 }));
-                alert('Registrácia úspešná! Teraz sa môžete prihlásiť.');
-                toggleForm();
-            }
+          document.getElementById('error-message').innerText = 'Nesprávne prihlasovacie údaje!';
+          document.getElementById('error-message').style.display = 'block';
         }
+      } else {
+        // Registrácia
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        if (password !== confirmPassword) {
+          document.getElementById('error-message').innerText = 'Heslá sa nezhodujú!';
+          document.getElementById('error-message').style.display = 'block';
+        } else if (localStorage.getItem(email)) {
+          document.getElementById('error-message').innerText = 'Používateľ už existuje!';
+          document.getElementById('error-message').style.display = 'block';
+        } else {
+          localStorage.setItem(email, JSON.stringify({ email: email, password: password }));
+          alert('Registrácia úspešná! Teraz sa môžete prihlásiť.');
+          toggleForm(); // Prepnutie späť na prihlásenie
+        }
+      }
     });
-</script>
+  </script>
+</body>
+</html>
+
+
+
 
 
 
