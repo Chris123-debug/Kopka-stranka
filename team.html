@@ -12,9 +12,20 @@
   <link href="css/font-awesome.min.css" rel="stylesheet" />
   <link href="css/style.css" rel="stylesheet" />
   <link href="css/responsive.css" rel="stylesheet" />
+  <style>
+    .score-container {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      background: #f8f9fa;
+      padding: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 
-<body class="sub_page">
+<body class="sub_page" onload="loadQuiz()">
 
   <div class="hero_area">
     <header class="header_section">
@@ -24,6 +35,7 @@
         </nav>
       </div>
     </header>
+    <div class="score-container">Body: <span id="userScore">0</span></div>
   </div>
 
   <section class="team_section layout_padding">
@@ -59,7 +71,9 @@
     function loadQuiz() {
       let quizContainer = document.getElementById('quizQuestions');
       quizContainer.innerHTML = "";
-
+      let userScore = localStorage.getItem('userScore') || 0;
+      document.getElementById('userScore').innerText = userScore;
+      
       questions.forEach((q, index) => {
         let questionDiv = document.createElement('div');
         questionDiv.className = 'question';
@@ -85,9 +99,12 @@
         }
       }
       document.getElementById('quizResult').innerHTML = `Správne odpovede: ${score} z ${totalQuestions}.`;
+      
+      let userScore = parseInt(localStorage.getItem('userScore')) || 0;
+      userScore += score;
+      localStorage.setItem('userScore', userScore);
+      document.getElementById('userScore').innerText = userScore;
     }
-
-    window.onload = loadQuiz;
   </script>
 
 </body>
