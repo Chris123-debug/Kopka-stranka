@@ -32,14 +32,6 @@
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
-  <!-- EmailJS -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function () {
-      emailjs.init("hafXJBp4EOGRVgsYg"); // Použi tvoj Public Key
-    })();
-  </script>
-
 </head>
 
 <body class="sub_page">
@@ -109,35 +101,7 @@
             <div class="quiz_section">
               <h3>Otestuj si svoje znalosti!</h3>
               <form id="quizForm">
-                <div class="question">
-                  <p><strong>1. Čo znamená skratka HTML?</strong></p>
-                  <input type="radio" name="q1" value="a"> Hyper Text Markup Language<br>
-                  <input type="radio" name="q1" value="b"> Hyperlinks and Text Markup Language<br>
-                  <input type="radio" name="q1" value="c"> Home Tool Markup Language<br>
-                </div>
-                <div class="question">
-                  <p><strong>2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?</strong></p>
-                  <input type="radio" name="q2" value="a"> color<br>
-                  <input type="radio" name="q2" value="b"> background-color<br>
-                  <input type="radio" name="q2" value="c"> bgcolor<br>
-                </div>
-                <div class="question">
-                  <p><strong>3. Aká je správna syntax pre komentár v JavaScripte?</strong></p>
-                  <input type="radio" name="q3" value="b"> // Toto je komentár <br>
-                  <input type="radio" name="q3" value="c"> /* Toto je komentár */ <br>
-                </div>
-                <div class="question">
-                  <p><strong>4. Ako označíte ID v CSS?</strong></p>
-                  <input type="radio" name="q4" value="a"> .id<br>
-                  <input type="radio" name="q4" value="b"> #id<br>
-                  <input type="radio" name="q4" value="c"> id<br>
-                </div>
-                <div class="question">
-                  <p><strong>5. Ktorý HTML tag sa používa na definovanie odseku?</strong></p>
-                  <input type="radio" name="q5" value="a"> &lt;paragraph&gt;<br>
-                  <input type="radio" name="q5" value="b"> &lt;section&gt;<br>
-                  <input type="radio" name="q5" value="c"> &lt;p&gt;<br>
-                </div>
+                <div id="quizQuestions"></div>
                 <button type="button" onclick="checkAnswers()">Odoslať</button>
               </form>
               <div id="quizResult"></div>
@@ -149,46 +113,77 @@
   </section>
 
   <script>
-    // Ulož aktuálny email po prihlásení
-    let currentEmail = localStorage.getItem('currentEmail');
+    let questions = [
+      {
+        question: "1. Čo znamená skratka HTML?",
+        options: ["Hyper Text Markup Language", "Hyperlinks and Text Markup Language", "Home Tool Markup Language"],
+        correctAnswer: "a"
+      },
+      {
+        question: "2. Ktorá vlastnosť sa používa na zmenu pozadia v CSS?",
+        options: ["color", "background-color", "bgcolor"],
+        correctAnswer: "b"
+      },
+      {
+        question: "3. Aká je správna syntax pre komentár v JavaScripte?",
+        options: ["// Toto je komentár", "/* Toto je komentár */", "<!-- Toto je komentár -->"],
+        correctAnswer: "a"
+      },
+      // Pridajte ďalších 27 otázok...
+    ];
 
-    // Funkcia na kontrolu odpovedí v kvíze a odoslanie emailu s výsledkom
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function loadQuiz() {
+      shuffle(questions);
+      let quizQuestions = questions.slice(0, 5);
+      let quizContainer = document.getElementById('quizQuestions');
+      quizContainer.innerHTML = "";
+
+      quizQuestions.forEach((q, index) => {
+        let questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.innerHTML = `<p><strong>${index + 1}. ${q.question}</strong></p>`;
+        
+        q.options.forEach((option, optionIndex) => {
+          let optionLetter = String.fromCharCode(97 + optionIndex);
+          questionDiv.innerHTML += `<input type="radio" name="q${index + 1}" value="${optionLetter}"> ${option}<br>`;
+        });
+
+        quizContainer.appendChild(questionDiv);
+      });
+    }
+
     function checkAnswers() {
-      var score = 0;
-      var totalQuestions = 5;
-      var correctAnswers = ['a', 'b', 'b', 'b', 'c'];
-      for (var i = 1; i <= totalQuestions; i++) {
-        var answer = document.querySelector('input[name="q' + i + '"]:checked');
+      let score = 0;
+      let totalQuestions = 5;
+      let correctAnswers = questions.slice(0, totalQuestions).map(q => q.correctAnswer);
+      for (let i = 1; i <= totalQuestions; i++) {
+        let answer = document.querySelector('input[name="q' + i + '"]:checked');
         if (answer && answer.value === correctAnswers[i - 1]) {
           score++;
         }
       }
       document.getElementById('quizResult').innerHTML = "Dosiahol(a) si " + score + " z " + totalQuestions správnych odpovedí.";
 
-      // Odoslanie emailu s výsledkom
-      emailjs.send('service_qqlky1g', 'template_3ts4kwq', {
-        to_email: currentEmail,
-        from_name: 'Christopher Kurthy', // Pridanie mena
-        subject: 'Výsledky kvízu',
-        message: 'Dosiahol(a) si ' + score + ' z ' + totalQuestions správnych odpovedí.'
-      }).then(function(response) { 
-        console.log('Email úspešne odoslaný!', response.status, response.text);
-      }, function(error) {
-        console.log('Chyba pri odosielaní emailu:', error);
-      });
+      // Zbieranie bodíkov
+      let totalPoints = localStorage.getItem('totalPoints') ? parseInt(localStorage.getItem('totalPoints')) : 0;
+      totalPoints += score;
+      localStorage.setItem('totalPoints', totalPoints);
+      document.getElementById('quizResult').innerHTML += "<br>Celkový počet bodov: " + totalPoints;
     }
 
-    // Načítanie aktuálneho emailu po prihlásení
-    window.onload = function() {
-      var email = localStorage.getItem('currentEmail');
-      if (email) {
-        currentEmail = email;
-      }
-    };
+    window.onload = loadQuiz;
   </script>
 
 </body>
 </html>
+
 
 
 
