@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="images/favicon.png" type="">
 
-  <title> PRM </title>
+  <title>PRM</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -21,56 +21,105 @@
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
-  <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-
   <!-- Custom styles for this template -->
   <link href="css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="css/responsive.css" rel="stylesheet" />
 
+  <style>
+    /* Nastavenie pozadia a písma pre stránku */
+    body {
+      background-color: #f0f0f0;  /* Svetlá farba pozadia */
+      font-family: Arial, sans-serif;  /* Nastavenie písma */
+      color: #333;  /* Farba písma pre text */
+    }
+
+    /* Nastavenie štýlu pre nadpis */
+    h1 {
+      color: #333333;  /* Nastavenie farby písma */
+      text-align: center;  /* Zarovnanie textu na stred */
+    }
+
+    /* Nastavenie štýlu pre odkaz */
+    a {
+      color: blue;  /* Farba odkazu */
+      text-decoration: none;  /* Odstránenie podčiarknutia odkazu */
+    }
+
+    /* Nastavenie bieleho písma pre vysvetlenia */
+    pre code {
+      color: white;  /* Biele písmo pre kód */
+      background-color: #333;  /* Tmavé pozadie pre kód */
+      padding: 10px;  /* Vnútorné okraje pre lepšiu čitateľnosť */
+      border-radius: 5px;  /* Zaoblené rohy */
+      display: block;  /* Zobrazenie kódu na samostatnom riadku */
+      margin-top: 10px;  /* Medzera nad kódom */
+      margin-bottom: 10px;  /* Medzera pod kódom */
+    }
+
+    pre {
+      color: white;  /* Biele písmo pre vysvetlenia */
+      background-color: #333;  /* Tmavé pozadie pre vysvetlenia */
+      padding: 15px;  /* Vnútorné okraje pre lepšiu čitateľnosť */
+      border-radius: 5px;  /* Zaoblené rohy */
+    }
+
+    /* CSS kód pre tlačidlo */
+    .button {
+      background-color: #4CAF50;  /* Zelené pozadie */
+      border: none;  /* Bez okraja */
+      color: white;  /* Biele písmo */
+      padding: 15px 32px;  /* Vnútorné okraje */
+      text-align: center;  /* Zarovnanie textu na stred */
+      text-decoration: none;  /* Odstránenie podčiarknutia */
+      display: inline-block;  /* Nastavenie typu zobrazenia na inline */
+      font-size: 16px;  /* Nastavenie veľkosti písma */
+      margin: 4px 2px;  /* Okraje okolo tlačidla */
+      cursor: pointer;  /* Zmena kurzora pri prechode myšou */
+      border-radius: 4px;  /* Zaoblené rohy */
+    }
+
+    .button:hover {
+      background-color: #45a049;  /* Zmena farby pozadia pri prechode myšou */
+    }
+
+  </style>
 </head>
 
 <body class="sub_page">
 
   <div class="hero_area">
-
     <div class="hero_bg_box">
       <div class="bg_img_box">
         <img src="images/hero-bg.png" alt="">
       </div>
     </div>
 
-    <!-- header section strats -->
+    <!-- header section starts -->
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <a class="navbar-brand" href="index.html">
-            <span>
-              PRM
-            </span>
+            <span>PRM</span>
           </a>
 
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
+            <span> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
+            <ul class="navbar-nav ">
               <li class="nav-item ">
-                <a class="nav-link" href="index.html">Domov </a>
+                <a class="nav-link" href="index.html">Domov</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html"> O Stránke</a>
+                <a class="nav-link" href="about.html">O Stránke</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="service.html">Interaktivita</a>
               </li>
               <li class="nav-item active">
-                <a class="nav-link" href="why.html">Jazyky <span class="sr-only">(current)</span> </a>
+                <a class="nav-link" href="why.html">Jazyky <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="team.html">Quiz</a>
@@ -79,7 +128,7 @@
                 <a class="nav-link" href="Prihlásenie.html"> <i class="fa fa-user" aria-hidden="true"></i> Prihlásiť sa</a>
               </li>
               <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               </form>
@@ -92,7 +141,6 @@
   </div>
 
   <!-- why section -->
-
   <section class="why_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -100,126 +148,141 @@
           Trošku o <span>Jazykoch</span>
         </h2>
       </div>
-      <div class="why_container">
-        <div class="box">
-          <div class="img-box">
-            <img src="images/w1.png" alt="">
-          </div>
-          <div class="detail-box">
-            <h5>
-              HTML
-            </h5>
-            <p>
-              HTML je značkovací jazyk na tvorbu a štruktúrovanie webových stránok.
-            </p>
-          </div>
+
+      <!-- HTML Section -->
+      <section id="html-info" class="info_section layout_padding2">
+        <div class="container">
+          <h3>HTML - Základy</h3>
+          <p>HTML je jazyk na tvorbu a štruktúrovanie obsahu webovej stránky. Pomocou HTML definujeme rôzne elementy stránky ako nadpisy, texty, obrázky a odkazy.</p>
+          <h4>Základný HTML kód</h4>
+          <pre><code>
+&lt;!DOCTYPE html&gt;  <!-- Určuje, že ide o HTML dokument -->
+&lt;html&gt;  <!-- Začiatok HTML dokumentu -->
+&lt;head&gt;  <!-- Sekcia hlavičky dokumentu -->
+&lt;title&gt;Stránka&lt;/title&gt;  <!-- Názov stránky v prehliadači -->
+&lt;/head&gt;
+&lt;body&gt;  <!-- Telo stránky, obsahuje všetko viditeľné -->
+  &lt;h1&gt;Toto je nadpis&lt;/h1&gt;  <!-- Hlavný nadpis -->
+  &lt;p&gt;Toto je odsek textu.&lt;/p&gt;  <!-- Odsek textu -->
+  &lt;a href="https://example.com"&gt;Kliknite sem&lt;/a&gt;  <!-- Odkaz -->
+&lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód definuje základnú štruktúru webovej stránky s nadpisom, odsekom a odkazom. `<!DOCTYPE html>` označuje, že ide o HTML5 dokument. `<html>` začína HTML dokument a `</html>` ho uzatvára. `<head>` obsahuje metadáta a `<body>` obsahuje obsah stránky.</p>
+          <ul>
+            <li><code>&lt;h1&gt;</code> - Tento tag definuje hlavný nadpis stránky.</li>
+            <li><code>&lt;p&gt;</code> - Tento tag definuje odsek textu.</li>
+            <li><code>&lt;a&gt;</code> - Tento tag slúži na vytvorenie odkazu, v atribúte href sa zadáva URL adresa, na ktorú odkaz smeruje.</li>
+          </ul>
+
+          <h3>Vysvetlenia HTML tagov:</h3>
+          <ul>
+            <li><code>&lt;html&gt;</code>: Začiatok HTML dokumentu.</li>
+            <li><code>&lt;head&gt;</code>: Sekcia hlavičky dokumentu, obsahuje informácie o stránke ako metaúdaje.</li>
+            <li><code>&lt;title&gt;</code>: Názov stránky, ktorý sa zobrazuje v okne prehliadača.</li>
+            <li><code>&lt;body&gt;</code>: Obsah stránky, ktorý sa zobrazuje používateľovi.</li>
+            <li><code>&lt;h1&gt;</code>: Hlavný nadpis, označuje najdôležitejší text.</li>
+            <li><code>&lt;p&gt;</code>: Odsek textu, ktorý je bežným blokovým prvkom.</li>
+            <li><code>&lt;a&gt;</code>: Odkaz, ktorý môže obsahovať URL adresu na presmerovanie.</li>
+            <li><code>&lt;img&gt;</code>: Obrázok, používa atribút `src` pre určenie zdroja obrázku.</li>
+            <li><code>&lt;ul&gt;</code>: Nesúrodý zoznam, používa nečíslované položky `<li>`.</li>
+            <li><code>&lt;ol&gt;</code>: Číslovaný zoznam, používa číslované položky `<li>`.</li>
+            <li><code>&lt;div&gt;</code>: Rozdeľuje obsah na bloky a umožňuje nastavenie štýlu.</li>
+            <li><code>&lt;span&gt;</code>: In-line element, používa sa na selekciu malých častí textu alebo iných elementov.</li>
+          </ul>
         </div>
-        <div class="box">
-          <div class="img-box">
-            <img src="images/w2.png" alt="">
-          </div>
-          <div class="detail-box">
-            <h5>
-              CSS
-            </h5>
-            <p>
-              CSS (Cascading Style Sheets) je jazyk na štýlovanie webových stránok. 
-              Umožňuje meniť farby, písma, rozloženie a responzivitu. Spolupracuje s HTML a vylepšuje vzhľad aj používateľský zážitok.
-            </p>
-          </div>
+      </section>
+
+      <!-- CSS Section -->
+      <section id="css-info" class="info_section layout_padding2">
+        <div class="container">
+          <h3>CSS - Základy</h3>
+          <p>CSS (Cascading Style Sheets) slúži na štýlovanie vzhľadu webových stránok. Môžeme ním upravovať farby, písma, rozloženie a ďalšie vizuálne vlastnosti stránok.</p>
+          <h4>Základný CSS kód</h4>
+          <pre><code>
+/* Nastavenie pozadia a písma pre stránku */
+body {
+  background-color: #f0f0f0;  /* Svetlá farba pozadia */
+  font-family: Arial, sans-serif;  /* Nastavenie písma */
+}
+
+/* Nastavenie štýlu pre nadpis */
+h1 {
+  color: #333333;  /* Nastavenie farby písma */
+  text-align: center;  /* Zarovnanie textu na stred */
+}
+
+/* Nastavenie štýlu pre odkaz */
+a {
+  color: blue;  /* Farba odkazu */
+  text-decoration: none;  /* Odstránenie podčiarknutia odkazu */
+}
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód mení pozadie na svetlo šedé a písmo na Arial. Nadpisy sú zarovnané na stred a odkazy majú modrú farbu bez podčiarknutia.</p>
+
+          <h3>Vysvetlenie CSS tagov a vlastností:</h3>
+          <ul>
+            <li><code>background-color</code>: Nastavuje farbu pozadia elementu.</li>
+            <li><code>color</code>: Nastavuje farbu textu v elemente.</li>
+            <li><code>font-family</code>: Určuje typ písma použitého v elemente.</li>
+            <li><code>text-align</code>: Určuje, ako bude text zarovnaný v rámci elementu (napr. na stred, vľavo alebo vpravo).</li>
+            <li><code>text-decoration</code>: Používa sa na úpravu dekorácie textu (napr. podčiarknutie, preškrtnutie).</li>
+            <li><code>padding</code>: Nastavuje vnútorné okraje okolo obsahu elementu.</li>
+            <li><code>border</code>: Definuje okraj elementu, jeho farbu, hrúbku a štýl.</li>
+            <li><code>display</code>: Určuje spôsob zobrazenia elementu (blokový, in-line, flex, grid, atď.).</li>
+          </ul>
         </div>
-        <div class="box">
-          <div class="img-box">
-            <img src="images/w3.png" alt="">
-          </div>
-          <div class="detail-box">
-            <h5>
-              Java Script
-            </h5>
-            <p>
-              JavaScript je programovací jazyk pre tvorbu dynamických webových stránok. Umožňuje interaktivitu, animácie, manipuláciu s HTML a CSS. 
-              Spolu s HTML a CSS tvorí základ moderného webového vývoja.
-            </p>
-          </div>
-        </div>
-        <div class="box">
-          <div class="img-box">
-            <img src="images/w4.png" alt="">
-          </div>
-          <div class="detail-box">
-            <h5>
-              Programovanie Stránky
-            </h5>
-            <p>
-              Programovanie webovej stránky zahŕňa HTML na štruktúru, CSS na dizajn a JavaScript na interaktivitu. 
-              Backend spracúva dáta, frontend zabezpečuje vzhľad. Moderné frameworky uľahčujú vývoj a optimalizáciu.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="">
-        <a href="">
+      </section>
+
+      <!-- JavaScript Section -->
+      <section id="js-info" class="info_section layout_padding2">
+        <div class="container">
+          <h3>JavaScript - Základy</h3>
+          <p>JavaScript je jazyk na pridávanie interaktivity na webové stránky. Používa sa na dynamické zmeny na stránke bez nutnosti jej načítania znova.</p>
+          <h4>Základný JavaScript kód</h4>
           
-        </a>
-      </div>
+          <h5>1. Zobrazenie upozornenia</h5>
+          <pre><code>
+function myFunction() {
+  alert("Ahoj, svet!");  // Zobrazi okno s upozornením
+}
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód zobrazuje upozornenie, ktoré obsahuje text "Ahoj, svet!" keď sa spustí funkcia <code>myFunction()</code>.</p>
+
+          <h5>2. Zmena textu na stránke</h5>
+          <pre><code>
+function changeText() {
+  document.getElementById("demo").innerHTML = "Text bol zmenený!";  // Zmení obsah elementu s id="demo"
+}
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód mení text v HTML elemente s id "demo" na "Text bol zmenený!" keď sa spustí funkcia <code>changeText()</code>.</p>
+
+          <h5>3. Zmena farby pozadia</h5>
+          <pre><code>
+function changeBackgroundColor() {
+  document.body.style.backgroundColor = "lightblue";  // Zmení pozadie stránky na svetlomodré
+}
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód zmení farbu pozadia webovej stránky na svetlomodrú, keď sa spustí funkcia <code>changeBackgroundColor()</code>.</p>
+
+          <h5>4. Zobrazenie aktuálneho dátumu</h5>
+          <pre><code>
+function showDate() {
+  var currentDate = new Date();  // Získa aktuálny dátum
+  document.getElementById("date").innerHTML = currentDate;  // Zobrazí aktuálny dátum na stránke
+}
+          </code></pre>
+          <p><strong>Vysvetlenie:</strong> Tento kód získa aktuálny dátum a zobrazí ho na stránke v elemente s id "date".</p>
+
+        </div>
+      </section>
     </div>
   </section>
 
-  <!-- end why section -->
+</body>
 
-  <!-- info section -->
+</html>
 
-  <section class="info_section layout_padding2">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_contact">
-            <h4>
-              
-            </h4>
-            
-          
-        </div>
-        <div class="col-md-6 col-lg-3 info_col">
-          <div class="info_detail">
-            <h4>
-             
-            </h4>
-            <p>
-          
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto info_col">
-          <div class="">
-            <h4>
-           
-            </h4>
-            <div class="info_links">
-              <a class="active" href="index.html">
-              
-              </a>
-              <a class="" href="about.html">
-              
-              </a>
-              <a class="" href="service.html">
-              
-              </a>
-              <a class="" href="why.html">
-                
-              </a>
-              <a class="" href="team.html">
-               
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 info_col ">
-          <h4>
-           
-          </h4>
-          <form action="#">
-            <input type="text" placeholder="/>
             
   
     
