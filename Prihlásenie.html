@@ -46,7 +46,6 @@
       color: red;
       display: none;
     }
-    /* Pridanie štýlu pre odkaz na hlavnú stránku */
     .back-link {
       color: #00aaff;
       margin-top: 15px;
@@ -66,8 +65,7 @@
     <div id="welcome-section">
       <p id="welcome-message"></p>
       <button class="btn btn-primary btn-block" id="logoutButton" onclick="logout()">Odhlásiť sa</button>
-      <!-- Odkaz na hlavnú stránku -->
-      <a href="index.html" class="back-link"></a>
+      <a href="index.html" class="back-link">Vrátiť sa na hlavnú stránku</a>
     </div>
 
     <!-- Formulár pre prihlásenie/registráciu -->
@@ -78,18 +76,34 @@
       <button type="submit" class="btn btn-primary btn-block" id="authButton">Prihlásiť sa</button>
     </form>
 
-    <!-- Odkaz na hlavnú stránku -->
-    <a href="index.html" class="back-link">Vrátiť sa na hlavnú stránku</a>
-
     <p id="error-message">Chyba!</p>
     <p id="toggle-message">Nemáte účet? <span class="toggle-link" onclick="toggleForm()">Zaregistrujte sa</span></p>
   </div>
 
-  <script>
-    let isLogin = true; // Stav formulára (prihlásenie/registrácia)
-    let currentEmail = ""; // Ulož aktuálny email po prihlásení
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-analytics.js"></script>
 
-    // Skontroluj, či je používateľ prihlásený
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyRRZDLRwJWEIf58NGIShsNkXdySEx7eg",
+      authDomain: "dpprm-e87a5.firebaseapp.com",
+      projectId: "dpprm-e87a5",
+      storageBucket: "dpprm-e87a5.firebasestorage.app",
+      messagingSenderId: "543153244859",
+      appId: "1:543153244859:web:1d2d2a71d3748eda68b79e",
+      measurementId: "G-SNV3DGEYCD"
+    };
+
+    // Inicializácia Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const analytics = firebase.analytics();
+
+    let isLogin = true;
+    let currentEmail = ""; 
+
     window.onload = function() {
       currentEmail = localStorage.getItem('currentEmail') || "";
       if (currentEmail !== "") {
@@ -101,7 +115,7 @@
       isLogin = !isLogin;
       document.getElementById('form-title').innerText = isLogin ? 'Prihlásenie' : 'Registrácia';
       document.getElementById('authButton').innerText = isLogin ? 'Prihlásiť sa' : 'Zaregistrovať sa';
-      document.getElementById('toggle-message').innerHTML = isLogin ?
+      document.getElementById('toggle-message').innerHTML = isLogin ? 
         'Nemáte účet? <span class="toggle-link" onclick="toggleForm()">Zaregistrujte sa</span>' :
         'Máte účet? <span class="toggle-link" onclick="toggleForm()">Prihláste sa</span>';
       document.getElementById('confirmPassword').style.display = isLogin ? 'none' : 'block';
@@ -118,14 +132,16 @@
     }
 
     function logout() {
-      currentEmail = "";
-      localStorage.removeItem('currentEmail');
-      document.getElementById('form-title').innerText = 'Prihlásenie';
-      document.getElementById('authButton').innerText = 'Prihlásiť sa';
-      document.getElementById('authForm').style.display = 'block';
-      document.getElementById('toggle-message').style.display = 'block';
-      document.getElementById('welcome-section').style.display = 'none';
-      document.getElementById('authForm').reset();
+      auth.signOut().then(() => {
+        currentEmail = "";
+        localStorage.removeItem('currentEmail');
+        document.getElementById('form-title').innerText = 'Prihlásenie';
+        document.getElementById('authButton').innerText = 'Prihlásiť sa';
+        document.getElementById('authForm').style.display = 'block';
+        document.getElementById('toggle-message').style.display = 'block';
+        document.getElementById('welcome-section').style.display = 'none';
+        document.getElementById('authForm').reset();
+      });
     }
 
     document.getElementById('authForm').addEventListener('submit', function(event) {
@@ -135,28 +151,36 @@
 
       if (isLogin) {
         // Prihlásenie
-        const storedUser = JSON.parse(localStorage.getItem(email));
-        if (storedUser && storedUser.password === password) {
-          currentEmail = email; // Ulož aktuálny email po prihlásení
-          localStorage.setItem('currentEmail', currentEmail);
-          showWelcome();
-        } else {
-          document.getElementById('error-message').innerText = 'Nesprávne prihlasovacie údaje!';
-          document.getElementById('error-message').style.display = 'block';
-        }
+        auth.signInWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            currentEmail = email;
+            localStorage.setItem('currentEmail', currentEmail);
+            showWelcome();
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            document.getElementById('error-message').innerText = errorMessage;
+            document.getElementById('error-message').style.display = 'block';
+          });
       } else {
         // Registrácia
         const confirmPassword = document.getElementById('confirmPassword').value;
         if (password !== confirmPassword) {
           document.getElementById('error-message').innerText = 'Heslá sa nezhodujú!';
           document.getElementById('error-message').style.display = 'block';
-        } else if (localStorage.getItem(email)) {
-          document.getElementById('error-message').innerText = 'Používateľ už existuje!';
-          document.getElementById('error-message').style.display = 'block';
         } else {
-          localStorage.setItem(email, JSON.stringify({ email: email, password: password }));
-          alert('Registrácia úspešná! Teraz sa môžete prihlásiť.');
-          toggleForm(); // Prepnutie späť na prihlásenie
+          auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+              const user = userCredential.user;
+              alert('Registrácia úspešná! Teraz sa môžete prihlásiť.');
+              toggleForm();
+            })
+            .catch((error) => {
+              const errorMessage = error.message;
+              document.getElementById('error-message').innerText = errorMessage;
+              document.getElementById('error-message').style.display = 'block';
+            });
         }
       }
     });
